@@ -1,0 +1,18 @@
+version: '2.4'
+
+services:
+  app:
+    build: .
+    shm_size: '6gb'
+    image: shimao/align-image
+    runtime: nvidia
+    privileged: true
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - .:/root/vol
+    ports:
+      - '26008:6006'
+      - '28890:8888'
+    command: jupyter-lab

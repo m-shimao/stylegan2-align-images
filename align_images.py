@@ -22,7 +22,8 @@ if __name__ == "__main__":
 
     # landmarks_detector = DlibLandmarksDetector()
     landmarks_detector = FaLandmarksDetector()
-    for img_name in tqdm([x for x in os.listdir(RAW_IMAGES_DIR) if x[0] not in '._']):
+    img_names = sorted([x for x in os.listdir(RAW_IMAGES_DIR) if x[0] not in '._'])
+    for img_name in tqdm(img_names):
         raw_img_path = os.path.join(RAW_IMAGES_DIR, img_name)
         for i, face_landmarks in enumerate(landmarks_detector.get_landmarks(raw_img_path), start=1):
             if face_landmarks is None:
